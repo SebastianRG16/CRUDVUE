@@ -3,11 +3,11 @@ window.addEventListener('load', () => {
 
         el: '#appPeliculas',
         data: {
-            TotalPeliculas : 5,
-            Peliculas : [{
+            totalPeliculas : 5,
+            peliculas : [{
                 id: 1,
                 nombre: 'Buscando  a Nemo',
-                año: '2003',
+                anio: '2003',
                 precio : '$1.000',
                 cantidad : '7',
                 descripcion : 'Pelicula animada'
@@ -15,7 +15,7 @@ window.addEventListener('load', () => {
             {
                 id: 2,
                 nombre: 'El señor de los anillos',
-                año: '2002',
+                anio: '2002',
                 precio : '$5.000',
                 cantidad : '3',
                 descripcion : 'Pelicula de ficcion'
@@ -23,7 +23,7 @@ window.addEventListener('load', () => {
             {
                 id: 3,
                 nombre: 'El detective cantante',
-                año: '1986',
+                anio: '1986',
                 precio : '$7.000',
                 cantidad : '57',
                 descripcion : 'Pelicula accion'
@@ -31,7 +31,7 @@ window.addEventListener('load', () => {
             {
                 id: 4,
                 nombre: 'La guerra de las galaxias',
-                año: '1997',
+                anio: '1997',
                 precio : '$6.000',
                 cantidad : '23',
                 descripcion : 'Pelicula de ficcion'
@@ -40,7 +40,7 @@ window.addEventListener('load', () => {
             {
                 id: 5,
                 nombre: 'Uno de los nuestros',
-                año: '1990',
+                anio: '1990',
                 precio : '$13.000',
                 cantidad : '16',
                 descripcion : 'Pelicula de accion'
@@ -53,14 +53,13 @@ window.addEventListener('load', () => {
                 const { value: formValues } = await Swal.fire({
                     title: 'AGREGAR PELICULA',
                     html:
-                      '<input id="swal-input1" class="swal2-input" placeholder="ID">'+
-                      '<input id="swal-input2" class="swal2-input" placeholder="NOMBRE">'+
-                      '<input id="swal-input3" class="swal2-input" placeholder="AÑO">'+
-                      '<input id="swal-input4" class="swal2-input" placeholder="PRECIO">'+
-                      '<input id="swal-input5" class="swal2-input" placeholder="CANTIDAD">'+
-                      '<input id="swal-input6" class="swal2-input" placeholder="DESCRIPCION">',
+                      '<input id="swal-input1" class="swal2-input" placeholder="Id">'+
+                      '<input id="swal-input2" class="swal2-input" placeholder="Nombre">'+
+                      '<input id="swal-input3" class="swal2-input" placeholder="Anio">'+
+                      '<input id="swal-input4" class="swal2-input" placeholder="Precio">'+
+                      '<input id="swal-input5" class="swal2-input" placeholder="Cantidad">'+
+                      '<input id="swal-input6" class="swal2-input" placeholder="Descripción">',
                       
-
                     focusConfirm: false,
                     showCancelButton: true,
                     preConfirm: () => {
@@ -87,15 +86,15 @@ window.addEventListener('load', () => {
                   }
             },
             
-             btnEditar: async function(){
+             btnEditar: async function(pelicula){
                 const { value: formValues } = await Swal.fire({
                      title: 'EDITAR PELICULA',
                      html:
-                         '<input id="swal-input1" class="swal2-input" value="pelicula.nombre">'+
-                         '<input id="swal-input2" class="swal2-input" value="pelicula.año">'+
-                         '<input id="swal-input3" class="swal2-input" value="pelicula.precio">' +
-                         '<input id="swal-input4" class="swal2-input" value="pelicula.cantidad">' +
-                         '<input id="swal-input5" class="swal2-input" value="pelicula.descripcion">',
+                         '<input id="swal-input1" class="swal2-input" value="'+pelicula.nombre+'">'+
+                         '<input id="swal-input2" class="swal2-input" value="'+pelicula.anio+'">'+
+                         '<input id="swal-input3" class="swal2-input" value="'+pelicula.precio+'">' +
+                         '<input id="swal-input4" class="swal2-input" value="'+pelicula.cantidad+'">' +
+                         '<input id="swal-input5" class="swal2-input" value="'+pelicula.descripcion+'">',
 
                      focusConfirm: false,
                      showCancelButton: true,    
@@ -116,7 +115,7 @@ window.addEventListener('load', () => {
 
              },
              
-                btnEliminar: async function(){
+                btnEliminar: async function(pelicula){
                     Swal.fire({
                         position: 'middle',
                         icon: 'success',

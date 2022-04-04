@@ -4,39 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PELICULAS</title>
-
-    
+    <title>PELICULAS</title> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-
     <link rel="stylesheet" href="boostrap/css/boostrap.min.css">
     <link rel="stylesheet" href="plugins/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="main.css">
-
-    
-
-
-   
-
-
 </head>
+
 <body>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js""></script>
-
-    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js""></script> 
     <script src="boostrap/js/boostrap.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script src="main.js"></script>
-
-
-
-
-    
 
     <header>
         <h1 class="text-center text-dark"><span class="badge  bg-success">CRUD PELICULAS</span></h1>
@@ -47,10 +27,10 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <button @click ="btnAlta" class="btn btn-primary" title="Nuevo"> <i class="fas  fa-2x">Agregar</i></button>
+                    <button @click ="btnAlta" class="btn btn-primary" title="Agregar"> <i class="fas  fa-2x">Agregar</i></button>
                 </div>
                 <div class="col tex-right">
-                    <h5>Total Peliculas: <span class="badge bg-primary">{{TotalPeliculas}}</span></h5>
+                    <h5>Total Peliculas: <span class="badge bg-primary">{{totalPeliculas}}</span></h5>
                 </div>
             </div>
             <div class="row mt-5">
@@ -68,16 +48,16 @@
                         </thead>
                         
                         <tbody>
-                            <tr v-for="pelicula in Peliculas">
+                            <tr v-for="pelicula in peliculas">
                                 <td>{{pelicula.id}}</td>
                                 <td>{{pelicula.nombre}}</td>
-                                <td>{{pelicula.año}}</td>
+                                <td>{{pelicula.anio}}</td>
                                 <td>{{pelicula.precio}}</td>
                                 <td>{{pelicula.cantidad}}</td>
                                 <td>{{pelicula.descripcion}}</td>
                                 <td>
-                                    <button @click="btnEditar" class="btn btn-warning" title="editar"> <i class="fas fa-2x">Editar</i></button>
-                                    <button @click="btnEliminar" class="btn btn-danger" title="eliminar"> <i class="fas  fa-2x">Borrar</i></button>
+                                    <button @click="btnEditar(pelicula)" class="btn btn-warning" title="Editar"> <i class="fas fa-2x">Editar</i></button>
+                                    <button @click="btnEliminar(pelicula)" class="btn btn-danger" title="Eliminar"> <i class="fas  fa-2x">Borrar</i></button>
                                 </td>
                             </tr>
                         </tbody>
