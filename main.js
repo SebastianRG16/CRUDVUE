@@ -1,144 +1,82 @@
 window.addEventListener('load', () => {
     const vm = new Vue({
 
-        el: '#appPeliculas',
+        el: '#app',
         data: {
-            totalPeliculas : 5,
-            peliculas : [{
-                id: 1,
-                nombre: 'Buscando  a Nemo',
-                anio: '2003',
-                precio : '$1.000',
-                cantidad : '7',
-                descripcion : 'Pelicula animada'
-            },
-            {
-                id: 2,
-                nombre: 'El señor de los anillos',
-                anio: '2002',
-                precio : '$5.000',
-                cantidad : '3',
-                descripcion : 'Pelicula de ficcion'
-            },
-            {
-                id: 3,
-                nombre: 'El detective cantante',
-                anio: '1986',
-                precio : '$7.000',
-                cantidad : '57',
-                descripcion : 'Pelicula accion'
-            },
-            {
-                id: 4,
-                nombre: 'La guerra de las galaxias',
-                anio: '1997',
-                precio : '$6.000',
-                cantidad : '23',
-                descripcion : 'Pelicula de ficcion'
 
-            },
-            {
-                id: 5,
-                nombre: 'Uno de los nuestros',
-                anio: '1990',
-                precio : '$13.000',
-                cantidad : '16',
-                descripcion : 'Pelicula de accion'
-            }
-            ],
+            id : '',
+            nombre : '',
+            anio : '',
+            precio : '',
+            cantidad : '',
+            descripcion : '',
+            formActualizar : false,
+            idActualizar : -1,
+            nombreActualizar : '',
+            anioActualizar : '',
+            precioActualizar : '',
+            cantidadActualizar : '',
+            descripcionActualizar : '',
+            peliculas : [],
+            nuevaPelicula : ''
+
+            
         },
 
         methods: {
-                btnAlta:async function(){
-                const { value: formValues } = await Swal.fire({
-                    title: 'AGREGAR PELICULA',
-                    html:
-                      '<input id="swal-input1" class="swal2-input" placeholder="Id">'+
-                      '<input id="swal-input2" class="swal2-input" placeholder="Nombre">'+
-                      '<input id="swal-input3" class="swal2-input" placeholder="Anio">'+
-                      '<input id="swal-input4" class="swal2-input" placeholder="Precio">'+
-                      '<input id="swal-input5" class="swal2-input" placeholder="Cantidad">'+
-                      '<input id="swal-input6" class="swal2-input" placeholder="Descripción">',
-                      
-                    focusConfirm: false,
-                    showCancelButton: true,
-                    preConfirm: () => {
-                      return [
-                        document.getElementById('swal-input1').value,
-                        document.getElementById('swal-input2').value,
-                        document.getElementById('swal-input3').value,
-                        document.getElementById('swal-input4').value,
-                        document.getElementById('swal-input5').value,
-                        document.getElementById('swal-input6').value
-                        
-                      ]
-                    }
-                  })
+            agregarPelicula: function(){
+                this.peliculas.push({
+                    id: this.id,
+                    nombre: this.nombre,
+                    anio: this.anio,
+                    precio: this.precio,
+                    cantidad: this.cantidad,
+                    descripcion: this.descripcion
+                });
+                this.id = '';
+                this.nombre = '';
+                this.anio = '';
+                this.precio = '';
+                this.cantidad = '';
+                this.descripcion = '';
 
-                  if (formValues) {
-                    Swal.fire({
-                        position: 'middle',
-                        icon: 'success',
-                        title: 'Registro guardado exitosamente',
-                        showConfirmButton: false,
-                        timer: 1500
-                      })
-                  }
+                swal.fire({
+                    position: 'middle',
+                    icon: 'success',
+                    title: 'Registro guardado exitosamente',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            },    
+            
+            btnEditar: function(index){
+                
+                this.idActualizar = index;
+                this.nombreActualizar = this.peliculas[index].nombre;
+                this.anioActualizar = this.peliculas[index].anio;
+                this.precioActualizar = this.peliculas[index].precio;
+                this.cantidadActualizar = this.peliculas[index].cantidad;
+                this.descripcionActualizar = this.peliculas[index].descripcion;
+                
+                this.formActualizar = true;
+
             },
-            
-             btnEditar: async function(pelicula){
-                const { value: formValues } = await Swal.fire({
-                     title: 'EDITAR PELICULA',
-                     html:
-                         '<input id="swal-input1" class="swal2-input" value="'+pelicula.nombre+'">'+
-                         '<input id="swal-input2" class="swal2-input" value="'+pelicula.anio+'">'+
-                         '<input id="swal-input3" class="swal2-input" value="'+pelicula.precio+'">' +
-                         '<input id="swal-input4" class="swal2-input" value="'+pelicula.cantidad+'">' +
-                         '<input id="swal-input5" class="swal2-input" value="'+pelicula.descripcion+'">',
-
-                     focusConfirm: false,
-                     showCancelButton: true,    
                     
-                     preConfirm: () => {
-                      
-                    }
-                })
-                 if (formValues) {
-                    Swal.fire({
-                        position: 'middle',
-                        icon: 'success',
-                        title: 'Registro guardado exitosamente',
-                        showConfirmButton: false,
-                        timer: 1500
-                      })
-                  }
-
-             },
-             
-                btnEliminar: async function(pelicula){
-                    Swal.fire({
-                        position: 'middle',
-                        icon: 'success',
-                        title: 'Datos eliminados correctamente',
-                        showConfirmButton: false,
-                        timer: 1500
-                      })
-                }
-            
-
+            eliminar: function(index){
+                this.peliculas.splice(index, 1);
+            },
+            guardarActualizacion: function (index) {
+        
+                this.formActualizar = false;
+               
+                this.peliculas[index].nombre = this.nombreActualizar;
+                this.peliculas[index].anio = this.anioActualizar;
+                this.peliculas[index].precio = this.precioActualizar;
+                this.peliculas[index].cantidad = this.cantidadActualizar;
+                this.peliculas[index].descripcion = this.descripcionActualizar;
+            }
 
         }
-    
-
         }
-
-
-
-    );
-
-    
-});
-
-Swal.fire({
-    title: 'BIENVENIDO',
+    );  
 });
